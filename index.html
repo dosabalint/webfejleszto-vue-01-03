@@ -13,28 +13,38 @@
     <!-- oldalcím -->
     <h1>Kosár</h1>
 
-    <!-- hozzáadás -->
-    <div>
-        <input type="text" id="itemName" placeholder="Termék neve">
-    </div>
-    <div>
-        <input type="number" id="itemCount" placeholder="Darabszám">
-        <span> db </span>
-    </div>
-    <div>
-        <input type="number" id="itemBasePrice" placeholder="Egységár">
-        <span> Ft </span>
-    </div>
-    <div>
-        <button id="buttonAdd">Hozzáadás</button>
-    </div>
+    <main id="app">
 
-    <!-- lista -->
-    <ul id="itemList">
-    </ul>
+        <!-- hozzáadás -->
+        <div>
+            <input type="text" placeholder="Termék neve" v-model="newItem.name" @keydown.enter="AddNewItem()">
+        </div>
+        <div>
+            <input type="number" placeholder="Darabszám" v-model="newItem.count" @keydown.enter="AddNewItem()">
+            <span> db </span>
+        </div>
+        <div>
+            <input type="number" placeholder="Egységár" v-model="newItem.basePrice" @keydown.enter="AddNewItem()">
+            <span> Ft </span>
+        </div>
+        <div>
+            <button @click="AddNewItem()">Hozzáadás</button>
+        </div>
 
-    <!-- scripts.js -->
-    <script src="scripts.js"></script>
+        <!-- lista -->
+        <ul id="itemList">
+            <li v-for="item in itemCollection">
+                {{ item.name }}, {{ item.count }} x {{ item.basePrice }} Ft, {{ item.GetTotalPrice() }} Ft
+            </li>
+        </ul>
+    </main>
+
+    <!-- vendor JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- app JS -->
+    <script src="src/CartItem.js"></script>
+    <script defer src="scripts-vue.js"></script>
 
 </body>
 
